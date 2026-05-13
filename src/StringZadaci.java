@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class StringZadaci {
     public static void main(String[] args) {
+        //Zadatak 1
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Unesite tekst: ");
@@ -30,5 +31,19 @@ public class StringZadaci {
         System.out.println("Brojevi: " + brojevi);
         System.out.println("Ostalo: " + ostalo);
 
+        //Zadatak 2
+        System.out.print("Unesite recenicu: ");
+        String recenica = sc.nextLine();
+
+        recenica = recenica.trim();
+
+        String[] rijeci = recenica.split("\\s+");
+
+        for(int i=rijeci.length-1; i>= 0; i--){
+            System.out.print(rijeci[i]);
+            if(i != 0){
+                System.out.print(" ");
+            }
+        }
     }
 }
