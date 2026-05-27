@@ -1,19 +1,22 @@
 package model;
 
-public class Pravokutnik {
-    double sirina;
-    double visina;
+public class Pravokutnik extends GeometrijskiLik {
+
+    private double sirina;
+    private double visina;
 
     public Pravokutnik(double sirina, double visina) {
         this.sirina = sirina;
         this.visina = visina;
     }
 
-    public void opseg() {
-
+    @Override
+    public double opseg() {
+        return 2 * (sirina + visina);
     }
 
-    public void povrsina() {
-
+    @Override
+    public double povrsina() {
+        return sirina * visina;
     }
 }

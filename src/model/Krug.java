@@ -1,18 +1,20 @@
 package model;
 
-public class Krug {
-    double radijus;
+public class Krug extends GeometrijskiLik {
+
+    private double radijus;
 
     public Krug(double radijus) {
         this.radijus = radijus;
     }
 
-    public void opseg() {
-
+    @Override
+    public double opseg() {
+        return 2 * Math.PI * radijus;
     }
 
-    public void povrsina() {
-
+    @Override
+    public double povrsina() {
+        return Math.PI * radijus * radijus;
     }
-
 }
