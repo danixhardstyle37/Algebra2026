@@ -1,8 +1,8 @@
-package setovi;
+package mape;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class EvidencijaPolaznika {
 
@@ -10,8 +10,8 @@ public class EvidencijaPolaznika {
 
         Scanner sc = new Scanner(System.in);
 
-        //Set<Polaznik> listaPolaznika = new HashSet<>();
-        Set<Polaznik> listaPolaznika = new TreeSet<>();
+        Map<String, Polaznik> listaPolaznika = new HashMap<>();
+        // Map<String, Polaznik> listaPolaznika = new TreeMap<>();
 
         int br;
 
@@ -38,21 +38,14 @@ public class EvidencijaPolaznika {
                     System.out.print("Unesi e-mail: ");
                     String email = sc.nextLine();
 
-                    Polaznik noviPolaznik = new Polaznik(ime, prezime, email);
+                    String kljuc = email.toLowerCase();
 
-                    boolean postoji = false;
-
-                    for (Polaznik p : listaPolaznika) {
-                        if (p.getEmail().equalsIgnoreCase(email)) {
-                            postoji = true;
-                            break;
-                        }
-                    }
-
-                    if (postoji) {
+                    if (listaPolaznika.containsKey(kljuc)) {
                         System.out.println("Polaznik s tom e-mail adresom vec postoji");
                     } else {
-                        listaPolaznika.add(noviPolaznik);
+                        Polaznik noviPolaznik = new Polaznik(ime, prezime, email);
+
+                        listaPolaznika.put(kljuc, noviPolaznik);
                         System.out.println("Polaznik je uspjesno dodan");
                     }
 
@@ -64,33 +57,26 @@ public class EvidencijaPolaznika {
                     } else {
                         System.out.println("\nPopis polaznika:");
 
-                        for (Polaznik p : listaPolaznika) {
-                                System.out.println(p.getIme() + " " + p.getPrezime() + ", email: " + p.getEmail()
-                            );
+                        for (Polaznik p : listaPolaznika.values()) {
+                            System.out.println(p.getIme() + " " + p.getPrezime() + ", email: " + p.getEmail());
                         }
                     }
+
                     break;
 
                 case 3:
                     System.out.print("Unesi e-mail za pretragu: ");
                     String trazeniEmail = sc.nextLine();
 
-                    boolean pronaden = false;
+                    Polaznik pronadeniPolaznik = listaPolaznika.get(trazeniEmail.toLowerCase());
 
-                    for (Polaznik p : listaPolaznika) {
-                        if (p.getEmail().equalsIgnoreCase(trazeniEmail)) {
-                                System.out.println("Pronaden polaznik:");
-                                System.out.println(p.getIme() + " " + p.getPrezime() + ", email: " + p.getEmail()
-                            );
-
-                            pronaden = true;
-                            break;
-                        }
-                    }
-
-                    if (!pronaden) {
+                    if (pronadeniPolaznik != null) {
+                        System.out.println("Pronaden polaznik:");
+                        System.out.println(pronadeniPolaznik.getIme() + " " + pronadeniPolaznik.getPrezime() + ", email: " + pronadeniPolaznik.getEmail());
+                    } else {
                         System.out.println("Polaznik nije pronaden");
                     }
+
                     break;
 
                 case 4:
